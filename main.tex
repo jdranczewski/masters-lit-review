@@ -49,7 +49,7 @@
 		\vspace{0.4cm}
 		
 		
-		Word count: NaN
+		Word count: NaN (max is 2500)
 		
 	\end{center}
 \end{titlepage}
@@ -60,12 +60,37 @@
 \end{abstract}
 
 \section{Introduction}
-\lipsum[1]
+What are we going to be talking about? Why is this stuff useful?
 
-\section{Contents}
-\lipsum[2]
+\noindent
+``The review should have an introduction in which the aims and objectives of the project are established and in which the work is clearly put into context."
+
+\section{Nonlinear optics}
+Material response ususally linear, but this is not necessarily true at higher energies. Nonlinear formula for polarisation. Examples of nonlinear effects, maybe a derivation. Phase matching. Bulk materials, high-power lasers.
+
+\section{Material considerations}
+Various considerations to be made while thinking of materials to use. Start with the nonlinear part I guess. Asymmetry for second-order effects. High $\chi$, spectral dependence of it. Absorption - this is why metals suck. Dielectrics as our new hope, high refractive index makes them good for field concentration. Displacement current vs normal current (plasmonics). ENZ as an option. How common the material is as a factor (ITO as an example).
+
+\section{Nanoantennas}
+Coupling from the far to the near field (plane waves fine for bulk, but some confinement nice for smaller things). Need for miniaturisation if we want devices. Talk about modes, the way they lead to field enhancement, probably a bit about Mie somehow? Dark modes, bound states in continuum. ENZ and coupling out. Directivity, copying real antennas threaded in somehow.
+
+Talk about shapes? Like the fancy `few spheres' thing, compared to the trusty, Mie-compatible(?) cylinder.
+
+Intro to antenna properties - directivity, efficiency.
+
+\section{Enhancing nonlinear effects with nanoantennas}
+Smaller - we need to go around that, as we've previously seen that the more material the better. No requirement for phase matching, nice, simplifies the whole thing. Talk about the steps from \cite{koshelevSubwavelengthDielectricResonators2020}. Trivial effects like the increased area can be important for second order effects.
+
+\section{Predicting and optimising the nonlinear signal of an antenna}
+Small derivation from Lorenz reciprocity. Explain why this method is good. Finite-difference time domain stuff. Mention Lumerical.
+
+Talk about the steps from \cite{koshelevSubwavelengthDielectricResonators2020} (again?). Experimental methodology, computing. Combining materials. This section seems a bit useless...
 
 \section{Conclusion}
-\lipsum[3]
+You wish you were concluding\cite{aluTheoryModelingFeatures2013}.
+
+\bibliographystyle{myIEEEtran}
+% argument is your BibTeX string definitions and bibliography database(s)
+\bibliography{IEEEabrv,bib.bib}
 
 \end{document}
