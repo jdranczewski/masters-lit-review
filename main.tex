@@ -3,6 +3,7 @@
 \usepackage[utf8x]{inputenc}
 \usepackage{ucs}
 \usepackage{amsmath}
+\usepackage{bm}
 \usepackage{amsfonts}
 \usepackage{amssymb}
 \usepackage{graphicx}
@@ -35,6 +36,7 @@
 		\vspace{1.2cm}
 		\large
 		Project: EXSS-Sapienza-1\\
+		Project partner: Taran Attavar\\
 		Supervisor: Riccardo Sapienza\\
 		Assessor: Cynthia Vidal
 		
@@ -60,13 +62,33 @@
 \end{abstract}
 
 \section{Introduction}
-What are we going to be talking about? Why is this stuff useful?
-
-\noindent
-``The review should have an introduction in which the aims and objectives of the project are established and in which the work is clearly put into context."
+The goal of our project is to investigate, both experimentally and computationally, the applicability and efficiency of different nanoantenna designs for enhancing nonlinear optical effects at the nanoscale. Light manipulation using the nonlinear response of materials has existing and promising future applications in a number of areas, including frequency control for laser light, optical communications, spectroscopy, data storage, and sensing\cite{garmireNonlinearOpticsDaily2013a}. Nonlinear effects often require large interaction volumes and high laser powers to occur, and nanoantennas are one of the proposed ways to alleviate this and bring nonlinear optics to small-scale applications.
 
 \section{Nonlinear optics}
-Material response ususally linear, but this is not necessarily true at higher energies. Nonlinear formula for polarisation. Examples of nonlinear effects, maybe a derivation. Phase matching. Bulk materials, high-power lasers.
+When considering the propagation of light in matter, it is often assumed that the response of the material is linear\cite{jacksonClassicalElectrodynamics1999}, giving a simple expression for the polarisation:
+\begin{equation}
+	\label{eq:linear-polarisation}
+	\bm{P}=\epsilon_0\chi\bm{E},
+\end{equation}
+with $\epsilon_0$ being the permittivity of free space, and $\bm{E}$ the electric field. As outlined in \cite{boydNonlinearOptics2008}, this expression can be generalised to include terms that only gain significance at higher field magnitudes, and can be thought to correspond to potentials for the electrons in the material deviating from the simple harmonic approximation:
+\begin{align}
+	\label{eq:nonlinear-polarisation}
+	\bm{P}&=\epsilon_0(\chi^{(1)}\bm{E}+\chi^{(2)}\bm{E}^2+\chi^{(3)}\bm{E}^3+...)\\
+	&=\bm{P}^{(1)}+\bm{P}^{(2)}+\bm{P}^{(3)}+...,
+\end{align}
+where $\chi^{(n)}$ is known as the $n^{th}$ order nonlinear susceptibility, and is in general a tensor.
+
+Now if we allow $\bm{E}$ to vary in time we will also get time variation in $\bm{P}$, and that movement of charges drives a further electric field oscillation. One can then see how the nonlinear terms in \eqref{eq:nonlinear-polarisation} lead to additional frequency components in this new oscillation. For a simple example adapted from \cite{boydNonlinearOptics2008}, we can take $\bm{E}(t)=\bm{E}_0\cos(\omega t)$ and look at the second order polarisation:
+\begin{equation}
+	\label{eq:example-polarisation}
+	\bm{P}^{(2)}=\frac{\epsilon_0\chi^{(2)}}{2}\bm{E}_0^2\left(1+\cos(2\omega t)\right).
+\end{equation}
+This then drives an electromagnetic wave (the \emph{signal}) at angular frequency $2\omega$, compared to $\omega$ for the incoming (\emph{pump}) wave. The process is known as second harmonic generation (SHG).
+
+Other basic nonlinear processes of note include third harmonic generation (THG), sum and difference frequency generation ($\omega'=\omega_1\pm\omega_2$), changes to the refractive index (a third order process), and others\cite{boydNonlinearOptics2008}.
+
+%TODO this section may want to be shortened, it is quite long - and we basically throw phase matching out the window once we arrive in nanoantenna land.
+The \emph{phase matching} parameter, $\Delta k = k'-k$ is crucial in designing most nonlinear processes that involve a change in frequency\cite{boydNonlinearOptics2008}. As both the pump (wavevector $k$) and signal ($k'$) fields interact with the same electric dipoles, the best conditions for coupling between them is when they are in phase such that they don't interfere destructively. While achieving $\Delta k=0$ is possible through anomalous dispersion, it is more feasible to do this by utilising birefringence. This is only possible for some materials, but if done correctly it can lead to quadratic dependence of the signal density on the interaction distance. On the other hand, if $\Delta k\neq 0$, choosing the wrong sample length can lead to a total loss of signal.
 
 \section{Material considerations}
 Various considerations to be made while thinking of materials to use. Start with the nonlinear part I guess. Asymmetry for second-order effects. High $\chi$, spectral dependence of it. Absorption - this is why metals suck. Dielectrics as our new hope, high refractive index makes them good for field concentration. Displacement current vs normal current (plasmonics). ENZ as an option. How common the material is as a factor (ITO as an example).
