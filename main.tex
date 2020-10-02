@@ -11,6 +11,16 @@
 \usepackage{lipsum}
 \usepackage[hidelinks]{hyperref}
 \usepackage{indentfirst}
+\usepackage[margin=1cm]{caption}
+\usepackage{siunitx}
+
+\usepackage[superscript, nomove]{cite}
+
+\makeatletter
+\renewcommand{\@citess}[1]{\textsuperscript{[#1]}}
+\makeatother
+
+\newcommand{\citein}[1]{[\citen{#1}]}
 
 \usepackage[left=2.2cm, right=2.2cm, top=2.2cm, bottom=2.2cm]{geometry}
 
@@ -70,7 +80,7 @@ When considering the propagation of light in matter, it is often assumed that th
 	\label{eq:linear-polarisation}
 	\bm{P}=\epsilon_0\chi\bm{E},
 \end{equation}
-with $\epsilon_0$ being the permittivity of free space, and $\bm{E}$ the electric field. As outlined in \cite{boydNonlinearOptics2008}, this expression can be generalised to include terms that only gain significance at higher field magnitudes, and can be thought to correspond to potentials for the electrons in the material deviating from the simple harmonic approximation:
+with $\epsilon_0$ being the permittivity of free space, and $\bm{E}$ the electric field. As outlined in \citein{boydNonlinearOptics2008}, this expression can be generalised to include terms that only gain significance at higher field magnitudes, and can be thought to correspond to potentials for the electrons in the material deviating from the simple harmonic approximation:
 \begin{align}
 	\label{eq:nonlinear-polarisation}
 	\bm{P}&=\epsilon_0(\chi^{(1)}\bm{E}+\chi^{(2)}\bm{E}^2+\chi^{(3)}\bm{E}^3+...)\\
@@ -78,7 +88,7 @@ with $\epsilon_0$ being the permittivity of free space, and $\bm{E}$ the electri
 \end{align}
 where $\chi^{(n)}$ is known as the $n^{th}$ order nonlinear susceptibility, and is in general a tensor.
 
-Now if we allow $\bm{E}$ to vary in time we will also get time variation in $\bm{P}$, and that movement of charges drives a further electric field oscillation. One can then see how the nonlinear terms in \eqref{eq:nonlinear-polarisation} lead to additional frequency components in this new oscillation. For a simple example adapted from \cite{boydNonlinearOptics2008}, we can take $\bm{E}(t)=\bm{E}_0\cos(\omega t)$ and look at the second order polarisation:
+Now if we allow $\bm{E}$ to vary in time we will also get time variation in $\bm{P}$, and that movement of charges drives a further electric field oscillation. One can then see how the nonlinear terms in \eqref{eq:nonlinear-polarisation} lead to additional frequency components in this new oscillation. For a simple example adapted from \citein{boydNonlinearOptics2008}, we can take $\bm{E}(t)=\bm{E}_0\cos(\omega t)$ and look at the second order polarisation:
 \begin{equation}
 	\label{eq:example-polarisation}
 	\bm{P}^{(2)}=\frac{\epsilon_0\chi^{(2)}}{2}\bm{E}_0^2\left(1+\cos(2\omega t)\right).
@@ -95,22 +105,31 @@ There is a number of factors to consider when choosing a material for nonlinear 
 
 While metals can be used as a medium for nonlinear effects, the currents appearing in them encounter resistance, which leads to losses. This is one of the reasons for a shift towards  utilising dielectric materials, where we have displacement currents instead\cite{krasnokAlldielectricOpticalNanoantennas2012,vandegroepDesigningDielectricResonators2013}, and can choose samples that have a large refractive index (needed for field confinement) and low absorption, preferably both at the pump and signal frequencies.
 
-A useful property that some materials, like Indium Tin Oxide (ITO), exhibit is epsilon-near-zero (ENZ). In these materials the real part of the relative permittivity goes to zero for electromagnetic waves at a given wavelength ($\lambda_{ENZ}$). This has interesting effects on light propagation, but importantly for us it can lead to an enhancement of $\chi^{(3)}$, and greatly increased field confinement\cite{reshefNonlinearOpticalEffects2019}. This can give significant enhancement of nonlinear effects.
+A useful property that some materials, like Indium Tin Oxide (ITO), exhibit is epsilon-near-zero (ENZ). In these materials the real part of the relative permittivity goes to zero for electromagnetic waves at a given wavelength ($\lambda_{ENZ}$). This has interesting effects on light propagation, but importantly for us it can lead to an enhancement of $\chi^{(3)}$, and greatly increased field confinement\cite{reshefNonlinearOpticalEffects2019}. This can give significant enhancement of nonlinear effects. %TODO provide a number.
 
 \section{Nanoantennas}
-Coupling from the far to the near field (plane waves fine for bulk, but some confinement nice for smaller things). Need for miniaturisation if we want devices. Talk about modes, the way they lead to field enhancement, probably a bit about Mie somehow? Dark modes, bound states in continuum. ENZ and coupling out. Directivity, copying real antennas threaded in somehow.
+For some applications, especially in the field of optical devices, %TODO cite
+we may want to couple far-field radiation into the near-field by concentrating it in subwavelength nanostructures. This can be achieved using nanoantennas, which are small formations of metal or dielectric usually designed to have resonances that capture and enhance the field inside\cite{krasnokAlldielectricOpticalNanoantennas2012}.
 
-Talk about shapes? Like the fancy `few spheres' thing, compared to the trusty, Mie-compatible(?) cylinder.
+Simple antenna shapes (for example cylinders) can be considered in terms of basic resonances similar to the ones described by the Lorenz-Mie theory for spheres\cite{sainNonlinearOpticsAlldielectric2019}. Fig.~\ref{fig:modes2} shows a set of these resonances classified as electric, magnetic, and toroidal. Note that metallic antennas only produce significant resonances of the electric type, and mostly through surface effects\cite{kuznetsovOpticallyResonantDielectric2016} -- this is due to field suppression inside a metal. The ability to support both electric and magnetic modes is thus another advantage of dielectrics.
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=5in]{img/modes2}
+	\caption{The three lowest orders of electric, magnetic, and toroidal modes. Superpositions of these can be excited in nanoantennas. Adapted from \citein{savinovToroidalDipolarExcitation2014}.}
+	\label{fig:modes2}
+\end{figure}
 
-Intro to antenna properties - directivity, efficiency.
+In practice these resonances can spectrally overlap and combine to form modes observable in the antenna's scattering spectrum -- their far-field response. A notable example of this is the anapole mode, for which the toroidal and electric dipoles destructively interfere in the far-field, creating an \emph{dark} mode with low scattering\cite{grinblatEnhancedThirdHarmonic2016}. Mode superpositions can also be utilised to direct the antennas output through far-field interference.
+
+While this discussion focused on simple antenna shapes, more complex arrangements can be used to achieve various output goals. For example, \citein{krasnokAlldielectricOpticalNanoantennas2012} demonstrates how a set of silicon spheres laid out in analogy to the Yagi-Uda radio-frequency antenna design can result in low output beam-widths of \SI{40}{\degree}.
 
 \section{Enhancing nonlinear effects with nanoantennas}
-Smaller - we need to go around that, as we've previously seen that the more material the better. No requirement for phase matching, nice, simplifies the whole thing. Talk about the steps from \cite{koshelevSubwavelengthDielectricResonators2020}. Trivial effects like the increased area can be important for second order effects.
+Smaller - we need to go around that, as we've previously seen that the more material the better. No requirement for phase matching, nice, simplifies the whole thing. Talk about the steps from \citein{koshelevSubwavelengthDielectricResonators2020}. Trivial effects like the increased area can be important for second order effects.
 
 \section{Predicting and optimising the nonlinear signal of an antenna}
 Small derivation from Lorenz reciprocity. Explain why this method is good. Finite-difference time domain stuff. Mention Lumerical.
 
-Talk about the steps from \cite{koshelevSubwavelengthDielectricResonators2020} (again?). Experimental methodology, computing. Combining materials. This section seems a bit useless...
+Talk about the steps from \citein{koshelevSubwavelengthDielectricResonators2020} (again?). Experimental methodology, computing. Combining materials. This section seems a bit useless...
 
 \section{Conclusion}
 You wish you were concluding\cite{aluTheoryModelingFeatures2013}.
