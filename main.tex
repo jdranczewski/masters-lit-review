@@ -27,6 +27,7 @@
 \usepackage[svgnames]{xcolor}
 \definecolor{blue}{RGB}{13,71,161}
 
+\usepackage{chemformula}
 
 \author{Jakub Bartosz Dranczewski}
 \title{Designing, Simulating, and Optimising Nanoantennas that utilise Nonlinear Effects}
@@ -131,15 +132,18 @@ Good field enhancement can be achieved by selecting the correct mode of the ante
 
 When choosing a mode to excite in a nanoantenna, it is important to consider where we want to be concentrating the field. The above experiment was concerned with THG, and so field enhancement inside of the antenna was desirable. \citein{cambiassoBridgingGapDielectric2017a} demonstrates a gallium phosphide (GaP) nanodisk for efficient SHG; as GaP is centrosymmetric the field needs to be enhanced at the disk's surface, where the symmetry is broken and second order nonlinear effects can occur. A resonant mode has been found for which the electric field magnitude is up to 30 times greater than the incident $\bm{E}_0$ (in contrast to the anapole mode, this one corresponds to a peak in scattering). Together with the fact that a GaP substrate with GaP cylinders on it has a larger surface area than the substrate itself, this gives a SHG enhancement by 3 orders of magnitude compared to just the substrate, for an absolute efficiency of 0.0002\%.
 
-Research to mention:
-
-\cite{koshelevSubwavelengthDielectricResonators2020} ("Subwavelength dielectric resonator for nonlinear..."),
-Probably keep till last, as an illustration of the importance of good mode selection - this approach results in much greater efficiencies than the other ones. Hmm, maybe talk about this in terms of directionality? Excitation wave polarisation as a factor?
+The examples above demonstrate that it is important to excite a good mode to fit the desired outcome and get good enhancement of the nonlinear effect. Factors other than the antenna shape and the output amplitude can also be considered; for example \citein{koshelevSubwavelengthDielectricResonators2020} demonstrates how adjusting the thickness of an \ch{SiO2} spacer between an AlGaAs nanodisk and a reflective ITO layer, as well as the pump beam shape and polarisation, can help excite a mode referred to as a quasi-BIC (bound state in continuum), leading to a 2-order-of-magnitude increase compared to other implementations of a similar antenna. The choices made in design are also reflected in the output field's shape, as illustrated in Fig.~\ref{fig:directivity}.
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=6in]{img/directivity}
+	\caption{\textbf{(A)} The pump (red) excites a mode in the nanodisk, which in turn produces second harmonic radiation, shown in blue. The generated field also interacts with the antenna, producing the mode pattern seen on the picture. \textbf{(B)} and \textbf{(C)} show the far-field intensity of the generated radiation in different directions -- the four lobes are well pronounced in the backwards-directed generation.}
+	\label{fig:directivity}
+\end{figure}
 
 \section{Predicting and optimising the nonlinear signal of an antenna}
 Small derivation from Lorenz reciprocity. Explain why this method is good. Finite-difference time domain stuff. Mention Lumerical.
 
-Talk about the steps from \citein{koshelevSubwavelengthDielectricResonators2020} (again?). Experimental methodology, computing. Combining materials. This section seems a bit useless...
+Talk about the steps from \citein{koshelevSubwavelengthDielectricResonators2020}. Experimental methodology, computing. Combining materials. This section seems a bit useless...
 
 \section{Conclusion}
 You wish you were concluding\cite{aluTheoryModelingFeatures2013}.
