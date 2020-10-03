@@ -127,16 +127,14 @@ While this discussion focused on simple antenna shapes, more complex arrangement
 \section{Enhancing nonlinear effects with nanoantennas}
 An important advantage of nanoantennas as a nonlinear medium is that their subwavelength scale relaxes the phase matching condition\cite{sainNonlinearOpticsAlldielectric2019}, making the design easier and allowing for simplified use of non-birefringent materials. The decreased size results in a disadvantage for nonlinear interactions -- the smaller interaction volume. Beyond the intuitive diminishing of signal when we reduce the amount of material emitting it, there is also the significant dependence of the signal intensity on the interaction length, which can be quadratic in some cases (as seen in Section~\ref{section:nonlinear-optics}). To make up for this we rely on the field enhancing properties of nanoantennas.
 
+Good field enhancement can be achieved by selecting the correct mode of the antenna. For example, \citein{grinblatEnhancedThirdHarmonic2016} reports that the aforementioned anapole mode in a germanium nanodisk results in a much better energy concentration in the antenna; spectral analysis shows that the less scattering is observed, the more energy is confined in the nanoantenna near-field, highlighting the significance of dark modes. The generated third harmonic intensity when the anapole is excited is predicted and measured to be an order of magnitude greater than for the spectrally close electric dipole resonances, and four orders of magnitude better than unstructured germanium film. The absolute THG efficiency is given as 0.0001\%.
+
+When choosing a mode to excite in a nanoantenna, it is important to consider where we want to be concentrating the field. The above experiment was concerned with THG, and so field enhancement inside of the antenna was desirable. \citein{cambiassoBridgingGapDielectric2017a} demonstrates a gallium phosphide (GaP) nanodisk for efficient SHG; as GaP is centrosymmetric the field needs to be enhanced at the disk's surface, where the symmetry is broken and second order nonlinear effects can occur. A resonant mode has been found for which the electric field magnitude is up to 30 times greater than the incident $\bm{E}_0$ (in contrast to the anapole mode, this one corresponds to a peak in scattering). Together with the fact that a GaP substrate with GaP cylinders on it has a larger surface area than the substrate itself, this gives a SHG enhancement by 3 orders of magnitude compared to just the substrate, for an absolute efficiency of 0.0002\%.
+
 Research to mention:
 
 \cite{koshelevSubwavelengthDielectricResonators2020} ("Subwavelength dielectric resonator for nonlinear..."),
-Probably keep till last, as an illustration of the importance of good mode selection - this approach results in much greater efficiencies than the other ones.
-
-\cite{grinblatEnhancedThirdHarmonic2016} ("Enhanced...") - the anapole one
-Good throwback to the anapole mode, talk about correlation between field confinement and the radiating out (scattering valley - energy peak). They provide an absolute efficiency, and a comparison to a reference film, \emph{and} a different mode. Very nice!
-
-\cite{cambiassoBridgingGapDielectric2017} ("Bridging...") - the one with an increased surface area
-Talk about SHG as a surface effect, and the increased surface area as a factor. Same material for ND and substrate, mode chosen such that field enhanced near surface (x30), multiply by the surface area, x1350 increase compared to just bulk! Large overall efficiency, they claim the largest.
+Probably keep till last, as an illustration of the importance of good mode selection - this approach results in much greater efficiencies than the other ones. Hmm, maybe talk about this in terms of directionality? Excitation wave polarisation as a factor?
 
 \section{Predicting and optimising the nonlinear signal of an antenna}
 Small derivation from Lorenz reciprocity. Explain why this method is good. Finite-difference time domain stuff. Mention Lumerical.
