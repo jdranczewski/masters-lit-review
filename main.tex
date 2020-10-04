@@ -83,12 +83,14 @@ When considering the propagation of light in matter, it is often assumed that th
 	\bm{P}=\epsilon_0\chi\bm{E},
 \end{equation}
 with $\epsilon_0$ being the permittivity of free space, and $\bm{E}$ the electric field. As outlined in \citein{boydNonlinearOptics2008}, this expression can be generalised to include terms that only gain significance at higher field magnitudes, and can be thought to correspond to potentials for the electrons in the material deviating from the simple harmonic approximation:
-\begin{align}
+\begin{equation}
+\begin{aligned}
 	\label{eq:nonlinear-polarisation}
-	\bm{P}&=\epsilon_0(\chi^{(1)}\bm{E}+\chi^{(2)}\bm{E}^2+\chi^{(3)}\bm{E}^3+...)\\
-	&=\bm{P}^{(1)}+\bm{P}^{(2)}+\bm{P}^{(3)}+...,
-\end{align}
-where $\chi^{(n)}$ is known as the $n^{th}$ order nonlinear susceptibility, and is in general a tensor.
+	P_i&=\epsilon_0(\chi^{(1)}E_i+\chi^{(2)}E_i^2+\chi^{(3)}E_i^3+...)\\
+	&=P_i^{(1)}+P_i^{(2)}+P_i^{(3)}+...,
+\end{aligned}
+\end{equation} %TODO cdots?
+where $\chi^{(n)}$ is known as the $n^{th}$ order nonlinear susceptibility, and is in general a $(n+1)^{th}$ rank tensor -- the simplified form of \eqref{eq:nonlinear-polarisation} represents the concept of nonlinear interactions well, but is only valid for media that are lossless and dispersionless.
 
 Now if we allow $\bm{E}$ to vary in time we will also get time variation in $\bm{P}$, and that movement of charges drives a further electric field oscillation. One can then see how the nonlinear terms in \eqref{eq:nonlinear-polarisation} lead to additional frequency components in this new oscillation. For a simple example adapted from \citein{boydNonlinearOptics2008}, we can take $\bm{E}(t)=\bm{E}_0\cos(\omega t)$ and look at the second order polarisation:
 \begin{equation}
@@ -144,14 +146,59 @@ The examples above demonstrate that it is important to excite a good mode to fit
 Experimental investigation of nonlinear effects is important to capture the full spectrum of their behaviours, as aspects like the material's damage threshold and the way this limits laser pulse duration\cite{koshelevSubwavelengthDielectricResonators2020}. Nevertheless, a thorough computational investigation is an important step in planning and preparing for experimental work, as it allows for exploring arbitrary antenna parameters without manufacturing samples, and for directly looking at field distributions inside the antenna. %TODO write this better.
 
 \subsection{Predicting the field inside of the antenna}
+Finite-difference time-domain (FDTD) numerical methods can be used to solve Maxwell's equations when it is hard or impossible to do so analytically. The equations can be rewritten in terms of finite time and distance intervals\cite{kaneyeeNumericalSolutionInitial1966}, and solved numerically to give a description of the fields inside of the structure of interest.
+
+An example of a FDTD solver is the Lumerical 3D Electromagnetic Simulator \cite{lumericalinc.} -- this is the piece of software we are most likely going to use throughout our project.
 
 \subsection{Predicting the third harmonic signal}
+Given the polarisation function for a certain material or device, for example \eqref{eq:nonlinear-polarisation}, we can predict its nonlinear signal at a detector for a given pump wave. The method outlined below is known as the nonlinear scattering theory, and the derivation is adapted from the supplementary materials of \citein{obrienPredictingNonlinearProperties2015} and \citein{brunoNegativeRefractionTimevarying2020}.
+
+We start with Lorentz reciprocity, which is the principle stating that exchanging the source and detector of an electric field will not result in a change of the reading. This can be written as an integral over two volumes:
+\begin{equation}
+	\label{eq:lorentz-rec}
+	\int_A\mathbf{j}_A(\mathbf{r}_A)\cdot\mathbf{E}_D(\mathbf{r}_A)dV_A
+	= \int_D\mathbf{j}_D(\mathbf{r}_D)\cdot\mathbf{E}_A(\mathbf{r}_D)dV_D,
+\end{equation}
+where $\mathbf{j}_A$ is the nonlinear contribution to the current density in the antenna induced by the pump, which induces an electric field $\mathbf{E}_A$, and $\mathbf{j}_A$ is a dummy current dipole placed at the detector, which induces a field $\mathbf{E}_D$.
+
+By realising that
+\begin{equation}
+	\label{eq:lorentz-p}
+	\mathbf{j}_A(\mathbf{r})=\frac{\partial\mathbf{P}_A(\mathbf{r})}{\partial t}
+	=i\omega\mathbf{P}_A(\mathbf{r})
+\end{equation}
+for a polarisation excited by an electromagnetic wave (the $\mathbf{P}_A$ here is the nonlinear polarisation of a chosen order, with $\omega$ being the signal frequency), and writing the electric dipole as
+\begin{equation}
+	\label{eq:lorentz-dipole}
+	\mathbf{j}_D(\mathbf{r}) = J_0\Delta L\cdot\delta(\mathbf{r}-\mathbf{r}_{D0})\hat{\mathbf{j}}e^{i\omega t},
+\end{equation}
+where $\hat{\mathbf{j}}$ is the polarisation axis, $\delta$ the three-dimensional Dirac delta function, $\Delta L$ the dipole's length, and $\mathbf{r}_{D0}$ its location, we can integrate \eqref{eq:lorentz-rec} to give
+\begin{equation}
+	\label{eq:lorentz-final}
+	\mathbf{E}_A(\mathbf{r}_{D0})\cdot\hat{\mathbf{j}}=
+	\frac{i\omega e^{-i\omega t}}{J_0\Delta L}
+	\int_A\mathbf{P}_A(\mathbf{r}_A)\cdot\mathbf{E}_D(\mathbf{r}_A)dV_A,
+\end{equation}
+which is the electric field signal the detector will see.
+
+Now in order to compute the overlap integral in \eqref{eq:lorentz-final}, we need to know the nonlinear polarisation, and $\mathbf{E}_D$ at the nanoantenna. These can be obtained using two separate FDTD simulations of the antenna, one for the pump, and one for a dummy field (sometimes approximated as a plane wave) coming from a dipole at the detector.
 
 \subsection{Methods of optimising the antenna signal}
+Fig.~\ref{fig:steps} schematically shows the many steps that contribute to the final efficiency of nonlinear generation from an antenna. The pump must first couple into the antenna (the efficiency of this depends on the far-field representation of the mode), the mode can be more or less resonant (resulting in various levels of field enhancement), the overlap between the pump and signal modes we're exciting has to be good (see \eqref{eq:lorentz-final}), the signal mode, should can be further enhanced by resonance, and it should have a strong far-field presence.
 
-Small derivation from Lorenz reciprocity. Explain why this method is good. Finite-difference time domain stuff. Mention Lumerical. Mention the general tensor form of the nonlinear susceptibility.
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=6in]{img/steps}
+	\caption{A schematic showing some of the points of possible optimisation for nonlinear generation from an antenna. Adapted from \citein{koshelevSubwavelengthDielectricResonators2020}.}
+	\label{fig:steps}
+\end{figure}
 
-Talk about the steps from \citein{koshelevSubwavelengthDielectricResonators2020}. Experimental methodology, computing. Combining materials. This section seems a bit useless...
+Each of these steps can be optimised by choosing the appropriate resonances to excite, antenna shape and dimensions, the material it is made of, the operating frequency, and other parameters.
+
+In practice, the parameter space of interest would be first investigated computationally, and then samples would be manufactured and measured to confirm the theory and explore parameters of particular interest. \citein{obrienPredictingNonlinearProperties2015} provides a good example of this; the authors placed a 2D array of antennas on the substrate, with the antenna length and shape varying along the rows and columns respectively. By physically moving the sample so that the pump falls on different antennas they could then sweep a 2-parameter space efficiently.
+
+Another important concept in optimisation is parameter decoupling -- it is for example convenient
+to change the nanodisk diameter instead of the pump wavelength\cite{obrienPredictingNonlinearProperties2015, grinblatEnhancedThirdHarmonic2016}. This way we only look at the signal's dependence on the excited mode, not on the spectral properties of the material.
 
 \section{Conclusion}
 You wish you were concluding\cite{aluTheoryModelingFeatures2013}.
