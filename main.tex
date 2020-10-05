@@ -63,7 +63,7 @@
 		\vspace{0.4cm}
 		
 		
-		Word count: 2400 %TODO update this of course!
+		Word count: 2402 %TODO update this of course!
 		
 	\end{center}
 \end{titlepage}
@@ -95,7 +95,7 @@ where $\chi^{(n)}$ is known as the $n^{th}$ order nonlinear susceptibility, and 
 Now if we allow $\bm{E}$ to vary in time we will also get time variation in $\bm{P}$, and that movement of charges drives a further electric field oscillation. One can then see how the nonlinear terms in \eqref{eq:nonlinear-polarisation} lead to additional frequency components in this new oscillation. For a simple example adapted from \citein{boydNonlinearOptics2008}, we can take $\bm{E}(t)=\bm{E}_0\cos(\omega t)$ and look at the second order polarisation:
 \begin{equation}
 	\label{eq:example-polarisation}
-	\bm{P}^{(2)}=\frac{\epsilon_0\chi^{(2)}}{2}\bm{E}_0^2\left(1+\cos(2\omega t)\right).
+	P_i^{(2)}=\frac{\epsilon_0\chi^{(2)}}{2}E_{0i}^2\left(1+\cos(2\omega t)\right).
 \end{equation}
 This then drives an electromagnetic wave (the \emph{signal}) at angular frequency $2\omega$, compared to $\omega$ for the incoming (\emph{pump}) wave $\bm{E}$. This process is known as second harmonic generation (SHG).
 
@@ -129,7 +129,7 @@ While this discussion focused on simple antenna shapes, more complex arrangement
 \section{Enhancing nonlinear effects with nanoantennas}
 An important advantage of nanoantennas as a nonlinear medium is that their subwavelength size relaxes the phase matching condition\cite{sainNonlinearOpticsAlldielectric2019}, making the design easier and allowing for simplified use of non-birefringent materials. The decreased size results in a disadvantage for nonlinear interactions -- the smaller interaction volume. Beyond the intuitive diminishing of signal when we reduce the amount of material emitting it, there is also the significant dependence of the signal intensity on the interaction length, which can be quadratic in some cases (as seen in Section~\ref{section:nonlinear-optics}). To make up for this we rely on the field enhancing properties of the antennas.
 
-Good field enhancement can be achieved by selecting the correct mode of the antenna. For example, \citein{grinblatEnhancedThirdHarmonic2016} reports that the aforementioned anapole mode in a germanium nanodisk corresponds to a high energy concentration in the antenna; spectral analysis shows that the less scattering is observed, the more energy is confined in the nanoantenna's near-field, highlighting the significance of dark modes. The generated third harmonic intensity when the anapole is excited is predicted and measured to be an order of magnitude greater than for the spectrally close electric dipole resonances, and four orders of magnitude better than from unstructured germanium film. The absolute THG efficiency is given as 0.0001\%.
+Good field enhancement can be achieved by selecting the correct mode of the antenna. For example, \citein{grinblatEnhancedThirdHarmonic2016} reports that the aforementioned anapole mode in a germanium nanodisk corresponds to a high energy concentration in the antenna; simulations show that the less scattering is observed, the more energy is confined in the nanoantenna's near-field, highlighting the significance of dark modes. The generated third harmonic intensity when the anapole is excited is predicted and measured to be an order of magnitude greater than for the spectrally close electric dipole resonances, and four orders of magnitude better than from unstructured germanium film. The absolute THG efficiency is given as 0.0001\%.
 
 When choosing a mode to excite in a nanoantenna, it is important to consider where we want the field to be concentrated. The above experiment was concerned with THG, and so field enhancement inside of the antenna was desirable. \citein{cambiassoBridgingGapDielectric2017a} demonstrates a gallium phosphide (GaP) nanodisk for efficient SHG; as GaP is centrosymmetric the field needs to be enhanced at the disk's surface, where second order nonlinear effects can occur. A resonant mode has been found for which the electric field magnitude at the surface is up to 30 times greater than the incident $E_0$. In contrast to the anapole mode, this one corresponds to a peak in scattering. Together with the fact that a GaP substrate with GaP cylinders on it has a larger surface area than the substrate itself, this gives a SHG enhancement by 3 orders of magnitude compared to just the substrate, for an absolute efficiency of 0.0002\%.
 
@@ -152,7 +152,7 @@ An example of a FDTD solver is the Lumerical 3D Electromagnetic Simulator \cite{
 \subsection{Predicting the third harmonic signal}
 Given the polarisation function for a certain material or device, for example \eqref{eq:nonlinear-polarisation}, we can predict its nonlinear signal at a detector for a given pump wave. The method outlined below is known as the nonlinear scattering theory, and the derivation is adapted from the supplementary materials of \citein{obrienPredictingNonlinearProperties2015} and \citein{brunoNegativeRefractionTimevarying2020}.
 
-We start with Lorentz reciprocity, which is the principle stating that exchanging the source and detector of an electric field will not result in a change of the detector's reading. This can be written as an integral over two volumes:
+We start with Lorentz reciprocity, which is the principle stating that exchanging the source and detector of an electric field will not result in a change of the detector's reading. This can be written as an integral over the antenna and detector volumes:
 \begin{equation}
 	\label{eq:lorentz-rec}
 	\int_A\bm{j}_A(\bm{r}_A)\cdot\bm{E}_D(\bm{r}_A)dV_A
@@ -194,7 +194,7 @@ Fig.~\ref{fig:steps} schematically shows the many steps that contribute to the f
 
 Each of these steps can be optimised by choosing the appropriate resonances to excite, antenna shape and dimensions, the material it is made of, the operating frequency, and other parameters.
 
-In practice, the parameter space of interest would be first investigated computationally, and then samples would be manufactured and measured to confirm the theory and explore parameters of particular interest. \citein{obrienPredictingNonlinearProperties2015} provides a good example of this; the authors placed a 2D array of antennas on the substrate, with the antenna length and shape varying along the rows and columns respectively. By physically moving the sample so that the pump falls on different antennas they could then sweep a 2-parameter space efficiently.
+In practice, the parameter space of interest would be first investigated computationally, and then samples would be manufactured and measured to confirm the theory and explore parameters of particular interest. \citein{obrienPredictingNonlinearProperties2015} provides a good example of this; the authors placed a 2D array of antennas on the substrate, with the antenna length and shape varying along the rows and columns respectively. By physically moving the sample so that the pump falls on different antennas they could then sweep this 2-parameter space efficiently.
 
 Another important concept in optimisation is parameter decoupling -- it is for example convenient
 to change the nanodisk diameter instead of the pump wavelength\cite{obrienPredictingNonlinearProperties2015, grinblatEnhancedThirdHarmonic2016}. This way we only look at the signal's dependence on the excited mode, not on the spectral properties of the material.
